@@ -165,9 +165,13 @@ describe('@koishijs/plugin-help', () => {
 
   it('cross platform', async () => {
     const app = new App()
-    app.command('foo.bar')
-    app.command('foo.baz')
-    app.platform('another').command('foo.potato')
-    await client.shouldReply('foo', 'bar')
+    app.plugin(help)
+    app.plugin(mock)
+    app.command('dev.bar')
+    app.command('dev.baz')
+    app.platform('another').command('dev.potato')
+    await app.start()
+    const client = app.mock.client('123')
+    await client.shouldReply('dev', 'bar')
   })
 })
