@@ -167,9 +167,13 @@ describe('@koishijs/plugin-help', () => {
     const app = new App()
     app.plugin(help)
     app.plugin(mock)
-    app.command('dev.bar')
-    app.command('dev.baz')
-    app.platform('another', 'another2').command('dev.potato')
+    app.plugin((_ctx) => {
+      _ctx.command('dev.bar')
+      _ctx.command('dev.baz')
+    })
+    app.plugin((_ctx) => {
+      _ctx.platform('another', 'another2').command('dev.potato')
+    })
     await app.start()
     const client = app.mock.client('123')
     await client.shouldReply('dev', 'bar')
