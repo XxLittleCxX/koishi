@@ -162,4 +162,12 @@ describe('@koishijs/plugin-help', () => {
     await client.shouldReply('foo', 'pass')
     await client.shouldReply('test -h', '指令：test <arg>')
   })
+
+  it('cross platform', async () => {
+    const app = new App()
+    app.command('foo.bar')
+    app.command('foo.baz')
+    app.platform('another').command('foo.potato')
+    await client.shouldReply('foo', 'bar')
+  })
 })
