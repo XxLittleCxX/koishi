@@ -180,6 +180,6 @@ describe('@koishijs/plugin-help', () => {
     app.plugin(apply2)
     await app.start()
     const client = app.mock.client('123')
-    await client.shouldReply('dev', /baz/g)
+    await client.shouldReply('dev', /potato/g)
   })
 })
